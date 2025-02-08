@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -26,9 +27,8 @@ class FormularioActivity : AppCompatActivity() {
 
             btnEnviar.setOnClickListener { view ->
 
-                exibirSnackbar( view )
-
-
+                caixaDialogAlerta()
+                //exibirSnackbar( view )
                 //switchToggle()
                // radioButton()
                 //checkbox()
@@ -137,6 +137,47 @@ class FormularioActivity : AppCompatActivity() {
 
         snackbar.show()
 
+
+    }
+
+    private fun caixaDialogAlerta() {
+
+        AlertDialog.Builder(this)
+        .setTitle("Confirmar exclusão do item?")
+        .setMessage("Tem certeza que quer remover?")
+            .setNegativeButton("cancelar") { dialog, posicao ->
+                Toast.makeText(this, "Cancelar ($posicao)", Toast.LENGTH_SHORT).show() }
+            .setPositiveButton("remover") { dialog, posicao ->
+                Toast.makeText(this, "Remover ($posicao)", Toast.LENGTH_SHORT).show() }
+                .setCancelable( false ).setNeutralButton( "ajuda" ) { dialog, posicao ->
+                Toast.makeText(this, "Ajuda ($posicao)", Toast.LENGTH_SHORT).show() }
+                    .setIcon(R.drawable.ic_alerta_24)
+                    .create()
+                    .show()
+
+        /*
+        val alertBuilder = AlertDialog.Builder(this)
+        alertBuilder.setTitle("Confirmar exclusão do item?")
+        alertBuilder.setMessage("Tem certeza que quer remover?")
+
+        alertBuilder.setNegativeButton("cancelar") { dialog, posicao ->
+            Toast.makeText(this, "Cancelar ($posicao)", Toast.LENGTH_SHORT).show()
+        }
+
+        alertBuilder.setPositiveButton("remover") { dialog, posicao ->
+            Toast.makeText(this, "Remover ($posicao)", Toast.LENGTH_SHORT).show()
+        }
+
+        alertBuilder.setCancelable( false )
+        alertBuilder.setNeutralButton( "ajuda" ) { dialog, posicao ->
+            Toast.makeText(this, "Ajuda ($posicao)", Toast.LENGTH_SHORT).show()
+        }
+
+        alertBuilder.setIcon(R.drawable.ic_alerta_24)
+
+        val alertDialog = alertBuilder.create()
+        alertDialog.show()
+         */
 
     }
 
