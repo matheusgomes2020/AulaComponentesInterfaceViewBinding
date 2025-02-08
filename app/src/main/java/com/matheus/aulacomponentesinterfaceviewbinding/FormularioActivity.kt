@@ -2,6 +2,8 @@ package com.matheus.aulacomponentesinterfaceviewbinding
 
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -9,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.datepicker.OnSelectionChangedListener
 import com.google.android.material.snackbar.Snackbar
 import com.matheus.aulacomponentesinterfaceviewbinding.databinding.ActivityFormularioBinding
 
@@ -25,9 +28,13 @@ class FormularioActivity : AppCompatActivity() {
 
         with(binding) {
 
+            spinnerExibicao()
+
             btnEnviar.setOnClickListener { view ->
 
-                caixaDialogAlerta()
+
+                spinnerSelecionarItem()
+                //caixaDialogAlerta()
                 //exibirSnackbar( view )
                 //switchToggle()
                // radioButton()
@@ -178,6 +185,63 @@ class FormularioActivity : AppCompatActivity() {
         val alertDialog = alertBuilder.create()
         alertDialog.show()
          */
+
+    }
+
+    private fun spinnerExibicao() {
+
+        /*val categorias = listOf(
+            "Selecione uma categoria",
+            "Eletrônicos", "Roupas", "Móveis", "Roupas"
+        )*/
+        /*val categorias = resources.getStringArray(
+            R.array.categorias
+        )
+        binding.spinnerCategorias.adapter = ArrayAdapter(
+            this,
+            android.R.layout.simple_spinner_dropdown_item,
+            categorias
+        )*/
+
+        binding.spinnerCategorias.adapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.categorias,
+            android.R.layout.simple_spinner_dropdown_item
+        )
+
+        /*binding.spinnerCategorias.onItemSelectedListener = object: OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                //val itemSelecionado = parent?.getItemAtPosition(position)
+                val itemSelecionado = parent?.selectedItem
+                binding.textResultado.text = itemSelecionado.toString()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+        }*/
+
+    }
+
+
+    private fun spinnerSelecionarItem() {
+
+        val itemSelecionado = binding.spinnerCategorias.selectedItemPosition
+        val itemPosicao = binding.spinnerCategorias.selectedItemPosition
+
+        if (itemSelecionado == 0) {
+            binding.textResultado.text = "Selecione um item"
+        } else {
+            binding.textResultado.text = "item selecionado: $itemSelecionado - posição: $itemPosicao"
+        }
+
+
 
     }
 

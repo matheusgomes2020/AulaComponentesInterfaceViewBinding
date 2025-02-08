@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Aula Componentes Interface View Binding</string>
+    <string-array name="categorias">
+        <item>Selecione uma categoria</item>
+        <item>Eletrônicos</item>
+        <item>Roupas</item>
+        <item>Casa e Construção</item>
+    </string-array>
 </resources>
