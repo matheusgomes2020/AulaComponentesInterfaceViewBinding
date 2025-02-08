@@ -1,10 +1,14 @@
 package com.matheus.aulacomponentesinterfaceviewbinding
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.snackbar.Snackbar
 import com.matheus.aulacomponentesinterfaceviewbinding.databinding.ActivityFormularioBinding
 
 class FormularioActivity : AppCompatActivity() {
@@ -20,9 +24,22 @@ class FormularioActivity : AppCompatActivity() {
 
         with(binding) {
 
-            btnEnviar.setOnClickListener {
+            btnEnviar.setOnClickListener { view ->
+
+                exibirSnackbar( view )
+
+
+                //switchToggle()
+               // radioButton()
                 //checkbox()
             }
+
+
+
+            /*
+            rbMasculino.setOnClickListener {  }
+            rbMasculino.setOnCheckedChangeListener {  buttonView, isChecked -> }
+             */
 
             cbConfirmacao.setOnCheckedChangeListener { _, isChecked ->
                 val resultado = if (isChecked) "Sim" else "Não"
@@ -48,10 +65,79 @@ class FormularioActivity : AppCompatActivity() {
         }
     }
 
+    private fun switchToggle() {
+
+        val switchMarcado = binding.switchNotificacoes.isChecked
+        val toggleMarcado = binding.toggleAtivo.isChecked
+
+        val  texto = "&switch=$switchMarcado&toggle=$toggleMarcado"
+        binding.textResultado.text = texto
+
+    }
+
+    private fun radioButton() {
+
+        val masculino = binding.rbMasculino.isChecked
+
+        //binding.textResultado.text = if ( masculino ) "Masculino" else "Feminino"
+
+        val idItemSElecionado = binding.rgSexo.checkedRadioButtonId
+        binding.textResultado.text = when (idItemSElecionado) {
+            R.id.rbMasculino -> "Masculino"
+            R.id.rbFeminino -> "Feminino"
+            else -> "Nada selecionado"
+        }
+
+        binding.rgSexo.clearCheck()
+
+        /*
+        if (selecionadoMasculino) {
+
+        } else if( binding.rbFeminino.isChecked ) {
+
+        } else {
+
+        }
+        */
+
+    }
+
     private fun checkbox() {
         val selecionado = binding.cbConfirmacao.isChecked
         val resultado = if (selecionado) "Sim" else "Não"
         binding.textResultado.text = "valor selecionado: $resultado"
+    }
+
+    private fun exibirSnackbar( view: View ) {
+
+        val snackbar = Snackbar.make(view,
+            "Alteração feita com sucesso",
+            Snackbar.LENGTH_LONG
+        )
+
+
+        snackbar.setAction("Desfazer") {
+            Toast.makeText(this, "Desfeito", Toast.LENGTH_SHORT).show()
+        }
+
+        /*snackbar.setTextColor(
+            ContextCompat.getColor(
+                this,
+                R.color.red
+            )
+        )
+
+        snackbar.setBackgroundTint(
+            ContextCompat.getColor(
+                this,
+                R.color.yellow
+            )
+        )
+         */
+
+        snackbar.show()
+
+
     }
 
 }

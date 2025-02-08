@@ -30,12 +30,45 @@
             android:inputType="text"
             android:text="Digite seu e-mail" />
 
+        <RadioGroup
+            android:id="@+id/rgSexo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rbMasculino"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Masculino" />
+
+            <RadioButton
+                android:id="@+id/rbFeminino"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Feminino" />
+        </RadioGroup>
+
         <CheckBox
             android:id="@+id/cbConfirmacao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:checked="false"
             android:text="Sim, quero receber e-mails" />
+
+        <Switch
+            android:id="@+id/switchNotificacoes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ativar notificações"
+            android:textOff="ativo"
+            android:textOn="inativo" />
+
+        <ToggleButton
+            android:id="@+id/toggleAtivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textOff="INATIVO"
+            android:textOn="ATIVO" />
 
         <Button
             android:id="@+id/btnEnviar"
